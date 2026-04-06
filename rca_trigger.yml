@@ -1,0 +1,86 @@
+# .github/workflows/rca_trigger.yml
+# Copy this file to each Fabric2 repo's .github/workflows/ directory.
+# It triggers when release_build or snapshot_build completes (success or failure),
+# then checks if the conclusion was 'failure' before running the RCA pipeline.
+
+name: Build Failure RCA
+
+on:
+  workflow_run:
+    workflows:
+      - "release_build"
+      - "snapshot_build"
+    types:
+      - completed
+
+env:
+  OLLAMA_HOST: "http://ollama-rca.ollama-rca.svc.cluster.local:11434"
+  OLLAMA_MODEL: "gemma3:27b-it-qat"
+  MAX_LOG_TOKENS: "80000"
+  BUILD_TIME_THRESHOLD_MINUTES: "20"
+
+jobs:
+  rca-analysis:
+    # Only run if the triggering workflow FAILED
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: [self-hosted, linux, gdc]  # Must be a runner with access to GDC cluster network
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout RCA scripts
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run RCA pipeline
+        id: rca
+        env:
+          GITHUB_TOKEN: ${{ secrets.RCA_GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          FAILED_WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
+          FAILED_RUN_ID: ${{ github.event.workflow_run.id }}
+          FAILED_RUN_URL: ${{ github.event.workflow_run.html_url }}
+          FAILED_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          FAILED_SHA: ${{ github.event.workflow_run.head_sha }}
+          FAILED_REPO: ${{ github.repository }}
+          FAILED_ACTOR: ${{ github.event.workflow_run.actor.login }}
+          FAILED_STARTED_AT: ${{ github.event.workflow_run.run_started_at }}
+          FAILED_UPDATED_AT: ${{ github.event.workflow_run.updated_at }}
+        run: |
+          python scripts/run_rca.py \
+            --repo "$FAILED_REPO" \
+            --run-id "$FAILED_RUN_ID" \
+            --workflow-name "$FAILED_WORKFLOW_NAME" \
+            --branch "$FAILED_BRANCH" \
+            --sha "$FAILED_SHA" \
+            --actor "$FAILED_ACTOR" \
+            --run-url "$FAILED_RUN_URL" \
+            --started-at "$FAILED_STARTED_AT" \
+            --updated-at "$FAILED_UPDATED_AT"
+
+      - name: Upload RCA report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rca-report-${{ github.event.workflow_run.id }}
+          path: rca_output/
+          retention-days: 30
+
+      - name: Post RCA comment on associated PRs
+        if: steps.rca.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ secrets.RCA_GITHUB_TOKEN }}
+          FAILED_SHA: ${{ github.event.workflow_run.head_sha }}
+          FAILED_REPO: ${{ github.repository }}
+        run: |
+          python scripts/post_results.py \
+            --repo "$FAILED_REPO" \
+            --sha "$FAILED_SHA" \
+            --rca-file rca_output/rca_report.json

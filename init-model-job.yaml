@@ -1,0 +1,71 @@
+# This Job runs once to pull the Gemma 3 27B QAT model into the Ollama PVC.
+# On air-gapped GDC: You may need to pre-download the model and load it
+# from a local registry or volume. See docs/DEPLOYMENT.md for air-gapped instructions.
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ollama-model-pull
+  namespace: ollama-rca
+spec:
+  backoffLimit: 3
+  ttlSecondsAfterFinished: 86400  # Clean up after 24h
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: model-pull
+          image: ollama/ollama:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Starting Ollama server in background..."
+              ollama serve &
+              OLLAMA_PID=$!
+
+              echo "Waiting for server to be ready..."
+              for i in $(seq 1 60); do
+                if curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
+                  echo "Server is ready!"
+                  break
+                fi
+                echo "Waiting... ($i/60)"
+                sleep 2
+              done
+
+              echo "Pulling gemma3:27b-it-qat model..."
+              ollama pull gemma3:27b-it-qat
+
+              echo "Verifying model is available..."
+              ollama list
+
+              echo "Model pull complete. Shutting down server."
+              kill $OLLAMA_PID
+              wait $OLLAMA_PID 2>/dev/null
+              echo "Done."
+          env:
+            - name: OLLAMA_HOST
+              value: "0.0.0.0:11434"
+          volumeMounts:
+            - name: ollama-data
+              mountPath: /root/.ollama
+          resources:
+            requests:
+              cpu: "2"
+              memory: "8Gi"
+              nvidia.com/gpu: "1"
+            limits:
+              cpu: "4"
+              memory: "24Gi"
+              nvidia.com/gpu: "1"
+      volumes:
+        - name: ollama-data
+          persistentVolumeClaim:
+            claimName: ollama-model-storage
+      nodeSelector:
+        cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule

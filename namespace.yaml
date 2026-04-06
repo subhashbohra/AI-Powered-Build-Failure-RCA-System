@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ollama-rca
+  labels:
+    app: ollama-rca
+    purpose: build-failure-analysis
