@@ -22,6 +22,12 @@ Environment variables:
     MAX_LOG_TOKENS                Max tokens to send to model (default: 80000)
     BUILD_TIME_THRESHOLD_MINUTES  Alert threshold in minutes (default: 20)
     SLACK_WEBHOOK_URL             Optional Slack webhook URL
+
+    USE_VERTEX_AI                 Set to "true" to use Vertex AI instead of Ollama.
+                                  When enabled, OLLAMA_HOST and OLLAMA_MODEL are ignored.
+    GOOGLE_CLOUD_PROJECT          GCP project ID (required when USE_VERTEX_AI=true)
+    VERTEX_AI_LOCATION            GCP region (default: europe-west2)
+    VERTEX_AI_MODEL               Vertex AI model name (default: gemma-3-27b-it)
 """
 
 import argparse
@@ -65,6 +71,7 @@ def main() -> None:
     max_tokens = int(os.environ.get("MAX_LOG_TOKENS", "80000"))
     threshold_minutes = int(os.environ.get("BUILD_TIME_THRESHOLD_MINUTES", "20"))
     slack_webhook = os.environ.get("SLACK_WEBHOOK_URL", "")
+    use_vertex_ai = os.environ.get("USE_VERTEX_AI", "false").lower() == "true"
 
     if not github_token:
         logger.error("GITHUB_TOKEN is required")
@@ -124,13 +131,23 @@ def main() -> None:
     prompt_chars = sum(len(m["content"]) for m in messages)
     logger.info("Prompt built: %d total characters (~%d tokens)", prompt_chars, prompt_chars // 4)
 
-    # ── Step 3: Call Ollama ───────────────────────────────────────────
-    logger.info("Step 3: Sending to Ollama (%s)...", ollama_host)
-    client = OllamaClient(host=ollama_host, model=ollama_model, timeout=180)
+    # ── Step 3: Call model (Ollama or Vertex AI) ──────────────────────
+    if use_vertex_ai:
+        logger.info("Step 3: Sending to Vertex AI (USE_VERTEX_AI=true)...")
+        try:
+            from src.vertex_ai_client import VertexAIClient
+            client = VertexAIClient()
+        except (ImportError, ValueError) as e:
+            logger.error("Failed to initialise Vertex AI client: %s", e)
+            _write_fallback_report(output_dir, metadata, str(e))
+            sys.exit(0)
+    else:
+        logger.info("Step 3: Sending to Ollama (%s)...", ollama_host)
+        client = OllamaClient(host=ollama_host, model=ollama_model, timeout=180)
 
     if not client.health_check():
-        logger.error("Ollama health check failed — model may not be loaded")
-        _write_fallback_report(output_dir, metadata, "Ollama service unavailable")
+        logger.error("Model health check failed — service may be unavailable")
+        _write_fallback_report(output_dir, metadata, "Model service unavailable")
         sys.exit(0)
 
     try:
@@ -143,7 +160,7 @@ def main() -> None:
             rca.get("confidence"),
         )
     except Exception as e:
-        logger.error("Ollama request failed: %s", e)
+        logger.error("Model request failed: %s", e)
         _write_fallback_report(output_dir, metadata, str(e))
         sys.exit(0)
 
