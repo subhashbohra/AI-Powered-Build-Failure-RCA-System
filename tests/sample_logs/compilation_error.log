@@ -1,0 +1,32 @@
+##[group]Run mvn compile -B
+2025-06-01T09:00:01.000Z [INFO] Scanning for projects...
+2025-06-01T09:00:01.500Z [INFO] Building fabric2-user-service 1.8.3-SNAPSHOT
+2025-06-01T09:00:05.000Z [INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ fabric2-user-service ---
+2025-06-01T09:00:05.100Z [INFO] Compiling 147 source files to /home/runner/work/user-service/target/classes
+##[endgroup]
+
+##[group]Compilation output
+2025-06-01T09:00:12.345Z [ERROR] /home/runner/work/user-service/src/main/java/com/fabric2/user/UserRepository.java:[42,35] error: cannot find symbol
+2025-06-01T09:00:12.346Z   symbol:   method findByEmailAndStatus(String,UserStatus)
+2025-06-01T09:00:12.347Z   location: interface com.fabric2.user.UserRepository
+2025-06-01T09:00:12.450Z [ERROR] /home/runner/work/user-service/src/main/java/com/fabric2/user/UserService.java:[89,22] error: cannot find symbol
+2025-06-01T09:00:12.451Z   symbol:   class UserSearchCriteria
+2025-06-01T09:00:12.452Z   location: package com.fabric2.user.dto
+2025-06-01T09:00:12.460Z [ERROR] /home/runner/work/user-service/src/main/java/com/fabric2/user/UserService.java:[134,16] error: incompatible types: possible lossy conversion from long to int
+2025-06-01T09:00:12.470Z [ERROR] /home/runner/work/user-service/src/main/java/com/fabric2/notification/EmailNotifier.java:[23,8] error: cannot find symbol
+2025-06-01T09:00:12.471Z   symbol:   class EmailTemplate
+2025-06-01T09:00:12.472Z   location: package com.fabric2.notification
+2025-06-01T09:00:12.480Z [ERROR] 4 errors
+##[endgroup]
+
+##[group]Build summary
+2025-06-01T09:00:12.500Z [INFO] ------------------------------------------------------------------------
+2025-06-01T09:00:12.501Z [INFO] BUILD FAILURE
+2025-06-01T09:00:12.502Z [INFO] ------------------------------------------------------------------------
+2025-06-01T09:00:12.503Z [INFO] Total time: 11.502 s
+2025-06-01T09:00:12.504Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project fabric2-user-service: Compilation failure: Compilation failure:
+2025-06-01T09:00:12.510Z [ERROR] /home/runner/work/user-service/src/main/java/com/fabric2/user/UserRepository.java:[42,35] error: cannot find symbol
+2025-06-01T09:00:12.511Z [ERROR] /home/runner/work/user-service/src/main/java/com/fabric2/user/UserService.java:[89,22] error: cannot find symbol
+##[endgroup]
+
+##[error]Process completed with exit code 1.

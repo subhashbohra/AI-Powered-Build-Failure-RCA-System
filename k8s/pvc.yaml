@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ollama-model-storage
+  namespace: ollama-rca
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  # On GDC, use the default StorageClass or specify yours:
+  # storageClassName: standard-rwo

@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="Electron" modified="2026-04-06T00:00:00.000Z" agent="Build-RCA-Agent" version="24.0.0" type="device">
+  <diagram id="rca-arch-v2" name="Build Failure RCA — End-to-End Architecture">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ============================================================ -->
+        <!-- TITLE BAR                                                     -->
+        <!-- ============================================================ -->
+        <mxCell id="title-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a237e;strokeColor=#1a237e;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="1614" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="title-text" value="AI-Powered Build Failure RCA System" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="1614" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle-text" value="Ollama + Gemma 3 27B  ·  GDC / GKE Air-Gapped Cluster  ·  GitHub Enterprise (Fabric2)  ·  Self-Hosted Runners" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=10;fontColor=#c5cae9;" vertex="1" parent="1">
+          <mxGeometry x="20" y="38" width="1614" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- DEVELOPER BOX (left column)                                  -->
+        <!-- ============================================================ -->
+        <mxCell id="dev-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;strokeWidth=2;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="22" y="82" width="160" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-title" value="Developer" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=13;fontStyle=1;fontColor=#7b1fa2;" vertex="1" parent="1">
+          <mxGeometry x="22" y="86" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-avatar" value="" style="shape=mxgraph.basic.person;fillColor=#7b1fa2;strokeColor=#4a148c;" vertex="1" parent="1">
+          <mxGeometry x="71" y="112" width="62" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-action1" value="Pushes code" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="22" y="200" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-action2" value="Opens Pull Request" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="22" y="218" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-action3" value="Reads RCA on PR ←" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#0277bd;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="22" y="236" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-action4" value="Gets Slack alert ←" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#4a154b;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="22" y="254" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-action5" value="Fixes build &amp; re-pushes →" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#2e7d32;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="22" y="272" width="160" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- GITHUB ENTERPRISE BOX                                        -->
+        <!-- ============================================================ -->
+        <mxCell id="gh-zone" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f6f8fa;strokeColor=#24292e;strokeWidth=3;arcSize=2;" vertex="1" parent="1">
+          <mxGeometry x="210" y="82" width="660" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="gh-header-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#24292e;strokeColor=#24292e;arcSize=0;" vertex="1" parent="1">
+          <mxGeometry x="210" y="82" width="660" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="gh-header-dot1" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ff5f56;strokeColor=#e0443e;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="220" y="90" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="gh-header-dot2" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffbd2e;strokeColor=#dfa123;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="240" y="90" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="gh-header-dot3" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#27c93f;strokeColor=#1aab29;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="260" y="90" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="gh-header-title" value="GitHub Enterprise — Fabric2 Organization" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="280" y="84" width="460" height="28" as="geometry" />
+        </mxCell>
+
+        <!-- Build Workflows Group -->
+        <mxCell id="bw-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#f57f17;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="228" y="124" width="220" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="bw-label" value="Build Workflows" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontStyle=1;fontColor=#f57f17;" vertex="1" parent="1">
+          <mxGeometry x="228" y="128" width="220" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="bw-release" value="📦  release_build.yml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#f57f17;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="238" y="152" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bw-snapshot" value="📸  snapshot_build.yml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#f57f17;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="238" y="190" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bw-failure-badge" value="conclusion: failure" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e53935;strokeColor=#b71c1c;fontColor=#ffffff;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="268" y="230" width="140" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="bw-arrow-down" value="triggers" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#f57f17;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="228" y="255" width="220" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- RCA Trigger Workflow -->
+        <mxCell id="rca-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="468" y="124" width="380" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-label" value=".github/workflows/rca_trigger.yml" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontStyle=1;fontColor=#2e7d32;" vertex="1" parent="1">
+          <mxGeometry x="468" y="128" width="380" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-trigger-type" value="on: workflow_run — types: [completed]" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#555555;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="468" y="148" width="380" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-step1" value="① Fetch job logs — GET /actions/jobs/{id}/logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2e7d32;fontSize=9;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="170" width="356" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-step2" value="② Parse logs — error patterns + token trim (80K)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2e7d32;fontSize=9;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="202" width="356" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-step3" value="③ POST /api/chat → Gemma 3 27B (Ollama)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2e7d32;fontSize=9;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="234" width="356" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-step4" value="④ Post RCA markdown comment on PR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2e7d32;fontSize=9;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="266" width="356" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-step5" value="⑤ Upload rca_report.json artifact (30-day retention)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2e7d32;fontSize=9;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="298" width="356" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-runner-badge" value="runs-on: [self-hosted, linux, gdc]    timeout: 15 min" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#555555;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="468" y="330" width="380" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-perm-badge" value="permissions: actions:read  ·  pull-requests:write  ·  issues:write" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#2e7d32;" vertex="1" parent="1">
+          <mxGeometry x="468" y="350" width="380" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-if-badge" value="if: github.event.workflow_run.conclusion == &#39;failure&#39;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b9f6ca;strokeColor=#2e7d32;fontSize=9;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="520" y="370" width="276" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- PR Comment Preview -->
+        <mxCell id="pr-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0277bd;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="228" y="296" width="220" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="pr-title" value="PR Comment (GitHub)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=1;fontColor=#0277bd;" vertex="1" parent="1">
+          <mxGeometry x="228" y="300" width="220" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="pr-preview" value="🧪 Build Failure RCA — release_build&#xa;&#xa;Confidence: 🟢 High  |  Category: test_failure&#xa;Branch: main  |  Commit: a3f7d2c1&#xa;&#xa;Root Cause: AuthTokenServiceTest.&#xa;testValidTokenGeneration failed due&#xa;to JWT secret misconfiguration.&#xa;&#xa;Recommendation: Update jwt.secret&#xa;in application-prod.yml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0faff;strokeColor=#0277bd;fontSize=8;verticalAlign=top;align=left;spacingLeft=6;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="236" y="318" width="204" height="106" as="geometry" />
+        </mxCell>
+
+        <!-- Artifact Box -->
+        <mxCell id="artifact-box" value="📦  Workflow Artifact: rca-report-{run_id}.zip&#xa;rca_report.json  +  rca_report.md  ·  Retained 30 days" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c62828;strokeWidth=1;fontSize=9;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="468" y="414" width="380" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="gh-api-url-note" value="GITHUB_API_URL: ${{ github.api_url }}  — supports github.com &amp; GitHub Enterprise Server" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#888888;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="210" y="476" width="660" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="gh-secret-note" value="Secrets: RCA_GITHUB_TOKEN (actions:read + pull-requests:write)  ·  SLACK_WEBHOOK_URL (optional)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#888888;" vertex="1" parent="1">
+          <mxGeometry x="210" y="494" width="660" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- SELF-HOSTED RUNNER BOX                                       -->
+        <!-- ============================================================ -->
+        <mxCell id="runner-zone" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;strokeWidth=3;arcSize=2;" vertex="1" parent="1">
+          <mxGeometry x="210" y="560" width="660" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-header-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e65100;strokeColor=#e65100;" vertex="1" parent="1">
+          <mxGeometry x="210" y="560" width="660" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-header-text" value="Self-Hosted Runner  —  GDC / GKE Network  (Python 3.11)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="210" y="560" width="660" height="28" as="geometry" />
+        </mxCell>
+
+        <!-- Python module chips -->
+        <mxCell id="chip-log-parser" value="src/log_parser.py&#xa;&#xa;Pattern matching&#xa;Error extraction&#xa;Token trimming&#xa;80K token cap" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e65100;strokeWidth=2;fontSize=9;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="222" y="598" width="140" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="chip-ollama" value="src/ollama_client.py&#xa;&#xa;POST /api/chat&#xa;3x retry + backoff&#xa;Health check&#xa;JSON parser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e65100;strokeWidth=2;fontSize=9;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="598" width="140" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="chip-formatter" value="src/output_formatter.py&#xa;&#xa;Markdown comment&#xa;JSON artifact&#xa;Slack blocks&#xa;Category emoji" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e65100;strokeWidth=2;fontSize=9;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="526" y="598" width="140" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="chip-prompt" value="src/rca_prompt.py&#xa;&#xa;System prompt&#xa;User template&#xa;Build metadata&#xa;Structured JSON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e65100;strokeWidth=2;fontSize=9;verticalAlign=top;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="678" y="598" width="180" height="84" as="geometry" />
+        </mxCell>
+
+        <!-- Orchestrator -->
+        <mxCell id="orchestrator-bar" value="scripts/run_rca.py  —  Main Pipeline Orchestrator  (fetch → parse → prompt → infer → output)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe0b2;strokeColor=#e65100;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="222" y="694" width="636" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-env-vars" value="Env: GITHUB_TOKEN  ·  GITHUB_API_URL  ·  OLLAMA_HOST  ·  OLLAMA_MODEL  ·  MAX_LOG_TOKENS=80000  ·  BUILD_TIME_THRESHOLD_MINUTES=20" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#888888;" vertex="1" parent="1">
+          <mxGeometry x="210" y="732" width="660" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-network-req" value="Network requirements: → GitHub API (HTTPS :443)   ·   → Ollama ClusterIP (HTTP :11434)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#e65100;fontStyle=3;" vertex="1" parent="1">
+          <mxGeometry x="210" y="752" width="660" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-scenario-note" value="Scenario A: runner inside GDC (ARC) — use ClusterIP DNS   |   Scenario B: runner on peered VM — use NodePort :30434   |   Scenario C: register new runner inside GDC" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="210" y="774" width="660" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- GDC / GKE CLUSTER BOX                                        -->
+        <!-- ============================================================ -->
+        <mxCell id="gdc-zone" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f0ff;strokeColor=#4a148c;strokeWidth=3;arcSize=2;" vertex="1" parent="1">
+          <mxGeometry x="910" y="82" width="724" height="730" as="geometry" />
+        </mxCell>
+        <mxCell id="gdc-header-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4a148c;strokeColor=#4a148c;" vertex="1" parent="1">
+          <mxGeometry x="910" y="82" width="724" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="gdc-header-text" value="GDC / GKE Cluster  —  Air-Gapped  (No External API Access)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="910" y="82" width="724" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="gdc-airgap-badge" value="AIR-GAPPED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b71c1c;strokeColor=#b71c1c;fontColor=#ffffff;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1572" y="86" width="56" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Namespace box -->
+        <mxCell id="ns-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede7f6;strokeColor=#7b1fa2;strokeWidth=2;arcSize=3;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="924" y="120" width="696" height="672" as="geometry" />
+        </mxCell>
+        <mxCell id="ns-label" value="Namespace: ollama-rca" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=1;fontColor=#7b1fa2;" vertex="1" parent="1">
+          <mxGeometry x="924" y="124" width="696" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- K8s Service -->
+        <mxCell id="svc-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3949ab;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="938" y="150" width="310" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-title" value="Kubernetes Service" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontStyle=1;fontColor=#3949ab;" vertex="1" parent="1">
+          <mxGeometry x="938" y="154" width="310" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-name-chip" value="Name: ollama-rca" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3949ab;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="948" y="176" width="130" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-type-chip" value="Type: ClusterIP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3949ab;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="176" width="146" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-port-chip" value="Port: 11434 / TCP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c5cae9;strokeColor=#3949ab;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="948" y="208" width="130" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-dns-chip" value="Selector: app=ollama-rca" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3949ab;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="208" width="146" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-dns-label" value="ollama-rca.ollama-rca.svc.cluster.local : 11434" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=9;fontColor=#3949ab;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="938" y="238" width="310" height="14" as="geometry" />
+        </mxCell>
+
+        <!-- Ollama Pod -->
+        <mxCell id="pod-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="938" y="270" width="310" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="pod-title-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2e7d32;strokeColor=#2e7d32;" vertex="1" parent="1">
+          <mxGeometry x="938" y="270" width="310" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="pod-title" value="Pod: ollama/ollama:latest" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="938" y="270" width="310" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Model chip -->
+        <mxCell id="model-chip" value="Model: gemma3:27b-it-qat" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=1;fontColor=#1b5e20;" vertex="1" parent="1">
+          <mxGeometry x="938" y="300" width="310" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="model-details" value="Quantization: Q4_0 (QAT)  ·  VRAM: ~16 GB&#xa;Context window: 128K tokens&#xa;Max log input: 80K tokens (trimmed)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=9;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="950" y="320" width="286" height="52" as="geometry" />
+        </mxCell>
+
+        <!-- API Config chip -->
+        <mxCell id="api-chip-label" value="API Configuration" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=1;fontColor=#1b5e20;" vertex="1" parent="1">
+          <mxGeometry x="938" y="380" width="310" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="api-chip" value="POST /api/chat   stream: false&#xa;temperature: 0.3   num_ctx: 32768&#xa;model: gemma3:27b-it-qat" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2e7d32;fontSize=9;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="950" y="400" width="286" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- RCA JSON Output chip -->
+        <mxCell id="rca-json-label" value="RCA JSON Output (Structured)" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=1;fontColor=#1b5e20;" vertex="1" parent="1">
+          <mxGeometry x="938" y="458" width="310" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="rca-json-chip" value="root_cause  ·  category  ·  confidence&#xa;failed_components  ·  error_messages&#xa;build_time_analysis  ·  recommendation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2e7d32;fontSize=9;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="950" y="478" width="286" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- GPU chip -->
+        <mxCell id="gpu-chip-label" value="GPU Node" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=1;fontColor=#33691e;" vertex="1" parent="1">
+          <mxGeometry x="938" y="536" width="310" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu-chip" value="NVIDIA T4 or L4  ·  VRAM: 24 GB min&#xa;nvidia.com/gpu: 1  ·  CUDA enabled&#xa;nodeSelector: gke-accelerator: nvidia-tesla-t4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ccff90;strokeColor=#558b2f;fontSize=9;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="950" y="556" width="286" height="52" as="geometry" />
+        </mxCell>
+
+        <!-- Env vars strip -->
+        <mxCell id="pod-env-strip" value="OLLAMA_KEEP_ALIVE=24h   OLLAMA_NUM_PARALLEL=2   OLLAMA_HOST=0.0.0.0:11434" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="938" y="616" width="310" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- Resources strip -->
+        <mxCell id="pod-resources-strip" value="Requests: cpu=2  mem=8Gi  gpu=1   |   Limits: cpu=8  mem=32Gi  gpu=1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="938" y="634" width="310" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- Probes strip -->
+        <mxCell id="pod-probes-strip" value="readinessProbe: GET /api/tags   livenessProbe: GET /api/tags" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="938" y="652" width="310" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- Restart policy -->
+        <mxCell id="pod-restart-strip" value="restartPolicy: Always   replicas: 1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="938" y="670" width="310" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- Pod health -->
+        <mxCell id="pod-health" value="Status: Running  ●  Ready: 1/1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#69f0ae;strokeColor=#2e7d32;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1022" y="690" width="142" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="pod-bottom-space" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="938" y="718" width="310" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- PVC Cylinder -->
+        <mxCell id="pvc-cyl" value="PersistentVolumeClaim&#xa;&#xa;ollama-model-storage&#xa;50 Gi  ·  ReadWriteOnce&#xa;/root/.ollama" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#fff9c4;strokeColor=#f9a825;strokeWidth=2;fontSize=9;fontStyle=1;verticalAlign=top;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="270" width="180" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Init Model Job -->
+        <mxCell id="init-job-box" value="Job: ollama-model-pull&#xa;&#xa;One-time model pull&#xa;ollama pull gemma3:27b-it-qat&#xa;~16 GB  ·  backoffLimit: 3&#xa;ttlSecondsAfterFinished: 86400" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#ff8f00;strokeWidth=2;fontSize=9;verticalAlign=top;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="400" width="180" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- NodePort alternative -->
+        <mxCell id="nodeport-box" value="service-nodeport.yaml&#xa;(Alternative for external runner)&#xa;&#xa;Type: NodePort :30434&#xa;Accessible from peered VMs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c62828;strokeWidth=1;fontSize=9;verticalAlign=top;spacingTop=4;dashed=1;dashPattern=4 3;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="530" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- K8s manifests label -->
+        <mxCell id="k8s-manifests-label" value="k8s/namespace.yaml  ·  k8s/pvc.yaml  ·  k8s/deployment.yaml  ·  k8s/service.yaml  ·  k8s/init-model-job.yaml" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=8;fontColor=#7b1fa2;" vertex="1" parent="1">
+          <mxGeometry x="924" y="756" width="696" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- SLACK NOTIFICATION BOX                                       -->
+        <!-- ============================================================ -->
+        <mxCell id="slack-zone" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede7f6;strokeColor=#4a154b;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="22" y="560" width="170" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="slack-header" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#4a154b;strokeColor=#4a154b;" vertex="1" parent="1">
+          <mxGeometry x="22" y="560" width="170" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="slack-title" value="Slack Notification" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="22" y="560" width="170" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="slack-content" value="🚨 release_build — Failed&#xa;&#xa;Branch: main&#xa;Category: test_failure&#xa;Confidence: 🟢 High&#xa;Actor: developer1&#xa;&#xa;Root Cause:&#xa;AuthTokenService test&#xa;failed — JWT secret.&#xa;&#xa;Recommendation:&#xa;Update jwt.secret in&#xa;application-prod.yml&#xa;&#xa;[View Build Logs →]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4a154b;fontSize=8;verticalAlign=top;align=left;spacingLeft=6;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="30" y="590" width="154" height="182" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEGEND BOX                                                    -->
+        <!-- ============================================================ -->
+        <mxCell id="legend-zone" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#9e9e9e;strokeWidth=1;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="22" y="810" width="170" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#424242;strokeColor=#424242;" vertex="1" parent="1">
+          <mxGeometry x="22" y="810" width="170" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" value="LEGEND" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="22" y="810" width="170" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-gh" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f6f8fa;strokeColor=#24292e;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="32" y="840" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-gh-t" value="GitHub Enterprise" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#24292e;" vertex="1" parent="1">
+          <mxGeometry x="52" y="838" width="130" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-runner" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="32" y="862" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-runner-t" value="Self-Hosted Runner" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#e65100;" vertex="1" parent="1">
+          <mxGeometry x="52" y="860" width="130" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-gdc" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f0ff;strokeColor=#4a148c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="32" y="884" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-gdc-t" value="GDC / GKE Cluster" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#4a148c;" vertex="1" parent="1">
+          <mxGeometry x="52" y="882" width="130" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-gpu" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ccff90;strokeColor=#558b2f;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="32" y="906" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-gpu-t" value="GPU Node (T4/L4)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#558b2f;" vertex="1" parent="1">
+          <mxGeometry x="52" y="904" width="130" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-pr" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0277bd;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="32" y="928" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-pr-t" value="PR Comment Output" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#0277bd;" vertex="1" parent="1">
+          <mxGeometry x="52" y="926" width="130" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-slack" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ede7f6;strokeColor=#4a154b;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="32" y="950" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-slack-t" value="Slack Notification" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#4a154b;" vertex="1" parent="1">
+          <mxGeometry x="52" y="948" width="130" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-pvc" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f9a825;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="32" y="972" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-pvc-t" value="PersistentVolumeClaim" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#f9a825;" vertex="1" parent="1">
+          <mxGeometry x="52" y="970" width="130" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-divider" value="" style="line;strokeColor=#cccccc;" vertex="1" parent="1">
+          <mxGeometry x="32" y="993" width="150" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-solid-t" value="━━  Data flow (solid)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="32" y="1002" width="150" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-dashed-t" value="╌╌  Optional / return" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="32" y="1020" width="150" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="leg-numbered-t" value="①②  Ordered pipeline steps" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="32" y="1038" width="150" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- DATA FLOW REFERENCE PANEL (inside GDC zone, right side)      -->
+        <!-- ============================================================ -->
+        <mxCell id="flow-panel" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9fbe7;strokeColor=#827717;strokeWidth=1;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="150" width="320" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-panel-title" value="Pipeline Data Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=10;fontStyle=1;fontColor=#827717;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="154" width="320" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-1" value="① Build fails → rca_trigger.yml fires" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=8;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1288" y="174" width="304" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-2" value="② Runner fetches failed job logs (GitHub REST API)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=8;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1288" y="190" width="304" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-3" value="③ log_parser.py extracts errors + trims to 80K tokens" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=8;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1288" y="206" width="304" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-4" value="④ ollama_client.py POSTs to Gemma /api/chat" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=8;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1288" y="222" width="304" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-5" value="⑤ Gemma returns structured JSON RCA result" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=8;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1288" y="238" width="304" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-6" value="⑥ PR comment posted + artifact uploaded + Slack sent" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=8;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1288" y="254" width="304" height="14" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- ARROWS                                                        -->
+        <!-- ============================================================ -->
+
+        <!-- A: Developer → GitHub Enterprise (push/PR) -->
+        <mxCell id="arr-dev-gh" value="push / PR" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.4;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;strokeColor=#7b1fa2;strokeWidth=2;fontColor=#7b1fa2;fontSize=9;endArrow=block;endFill=1;fontStyle=1;" edge="1" source="dev-box" target="gh-zone" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- B: Build Workflows → RCA Trigger (on failure) -->
+        <mxCell id="arr-bw-rca" value="on: failure" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;strokeColor=#e53935;strokeWidth=3;fontColor=#e53935;fontSize=10;endArrow=block;endFill=1;fontStyle=1;" edge="1" parent="1" source="bw-group" target="rca-group">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- C: RCA Trigger → Self-Hosted Runner -->
+        <mxCell id="arr-rca-runner" value="dispatch to runner" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#2e7d32;strokeWidth=3;fontColor=#2e7d32;fontSize=10;endArrow=block;endFill=1;fontStyle=1;" edge="1" parent="1" source="rca-group" target="runner-zone">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- D: Self-Hosted Runner → GDC Cluster (Ollama HTTP) -->
+        <mxCell id="arr-runner-gdc" value="POST /api/chat  HTTP :11434" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.4;exitDx=0;exitDy=0;entryX=0;entryY=0.45;entryDx=0;entryDy=0;strokeColor=#e65100;strokeWidth=3;fontColor=#e65100;fontSize=10;endArrow=block;endFill=1;fontStyle=1;" edge="1" parent="1" source="runner-zone" target="gdc-zone">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- E: GDC returns RCA result → Runner (dashed) -->
+        <mxCell id="arr-gdc-runner" value="JSON RCA result" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.55;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#2e7d32;strokeWidth=2;fontColor=#2e7d32;fontSize=9;endArrow=open;endFill=0;dashed=1;dashPattern=6 3;" edge="1" parent="1" source="gdc-zone" target="runner-zone">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- F: Runner → PR Comment -->
+        <mxCell id="arr-runner-pr" value="POST /issues/{pr}/comments" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.35;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#0277bd;strokeWidth=2;fontColor=#0277bd;fontSize=9;endArrow=block;endFill=1;" edge="1" parent="1" source="runner-zone" target="pr-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- G: Runner → Slack (optional, dashed) -->
+        <mxCell id="arr-runner-slack" value="webhook" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.4;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#4a154b;strokeWidth=2;fontColor=#4a154b;fontSize=9;endArrow=block;endFill=1;dashed=1;dashPattern=6 3;" edge="1" parent="1" source="runner-zone" target="slack-zone">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- H: K8s Service → Pod -->
+        <mxCell id="arr-svc-pod" value="routes traffic" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#2e7d32;strokeWidth=2;fontColor=#2e7d32;fontSize=9;endArrow=block;endFill=1;" edge="1" parent="1" source="svc-box" target="pod-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- I: Pod → PVC -->
+        <mxCell id="arr-pod-pvc" value="volumeMount&#xa;/root/.ollama" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.4;entryDx=0;entryDy=0;strokeColor=#f9a825;strokeWidth=2;fontColor=#f9a825;fontSize=9;endArrow=block;endFill=1;" edge="1" parent="1" source="pod-box" target="pvc-cyl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- J: Init Job → PVC -->
+        <mxCell id="arr-job-pvc" value="writes model" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.8;entryDx=0;entryDy=0;strokeColor=#ff8f00;strokeWidth=1;fontColor=#ff8f00;fontSize=9;endArrow=block;endFill=1;dashed=1;dashPattern=4 3;" edge="1" parent="1" source="init-job-box" target="pvc-cyl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- K: RCA Trigger → Artifact -->
+        <mxCell id="arr-rca-artifact" value="upload-artifact@v4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#c62828;strokeWidth=1;fontColor=#c62828;fontSize=9;endArrow=block;endFill=1;dashed=1;dashPattern=4 3;" edge="1" parent="1" source="rca-group" target="artifact-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- FOOTER                                                        -->
+        <!-- ============================================================ -->
+        <mxCell id="footer-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eceff1;strokeColor=#b0bec5;" vertex="1" parent="1">
+          <mxGeometry x="20" y="1142" width="1614" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="footer-text" value="Build Failure RCA Agent  ·  Ollama + Gemma 3 27B QAT  ·  Air-Gapped GDC/GKE  ·  GitHub Enterprise Fabric2  ·  Self-Hosted Runners  ·  Python 3.11  ·  2026" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=8;fontColor=#78909c;" vertex="1" parent="1">
+          <mxGeometry x="20" y="1142" width="1614" height="20" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,31 @@
+##[group]Run mvn test -B -Xmx2g
+2025-06-01T11:00:00.000Z [INFO] Scanning for projects...
+2025-06-01T11:00:01.000Z [INFO] Building fabric2-analytics-service 4.0.0-SNAPSHOT
+##[endgroup]
+
+##[group]Test execution
+2025-06-01T11:00:05.000Z [INFO] --- maven-surefire-plugin:3.1.2:test (default-test) @ fabric2-analytics-service ---
+2025-06-01T11:00:06.000Z [INFO] Running com.fabric2.analytics.DataAggregatorTest
+2025-06-01T11:00:10.000Z [INFO] Running com.fabric2.analytics.ReportBuilderTest
+2025-06-01T11:00:15.000Z [INFO] Running com.fabric2.analytics.LargeDatasetProcessorTest
+2025-06-01T11:02:45.000Z [INFO] Processing batch 1/10 (10000 records)...
+2025-06-01T11:03:20.000Z [INFO] Processing batch 2/10 (10000 records)...
+2025-06-01T11:04:05.000Z [INFO] Processing batch 3/10 (10000 records)...
+2025-06-01T11:05:00.000Z [INFO] Processing batch 4/10 (10000 records)...
+2025-06-01T11:05:30.000Z [WARNING] Heap usage at 85% (1734MB/2048MB)
+2025-06-01T11:05:45.000Z [WARNING] Heap usage at 94% (1923MB/2048MB)
+2025-06-01T11:06:01.000Z Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+2025-06-01T11:06:01.100Z     at java.base/java.util.Arrays.copyOf(Arrays.java:3379)
+2025-06-01T11:06:01.101Z     at java.base/java.util.ArrayList.grow(ArrayList.java:265)
+2025-06-01T11:06:01.102Z     at java.base/java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:239)
+2025-06-01T11:06:01.103Z     at com.fabric2.analytics.LargeDatasetProcessor.buildResultSet(LargeDatasetProcessor.java:312)
+2025-06-01T11:06:01.104Z     at com.fabric2.analytics.LargeDatasetProcessorTest.testFullDatasetProcessing(LargeDatasetProcessorTest.java:78)
+2025-06-01T11:06:01.200Z OOMKilled: container fabric2-analytics exceeded memory limit 2Gi
+##[endgroup]
+
+##[group]Build summary
+2025-06-01T11:06:02.000Z [INFO] BUILD FAILURE
+2025-06-01T11:06:02.001Z [INFO] Total time: 6:01 min
+2025-06-01T11:06:02.002Z [ERROR] Failed to execute goal: There are test failures.
+2025-06-01T11:06:02.003Z ##[error]Process completed with exit code 1.
+##[endgroup]

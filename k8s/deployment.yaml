@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-rca
+  namespace: ollama-rca
+  labels:
+    app: ollama-rca
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama-rca
+  template:
+    metadata:
+      labels:
+        app: ollama-rca
+    spec:
+      containers:
+        - name: ollama
+          image: ollama/ollama:latest
+          ports:
+            - name: http
+              containerPort: 11434
+              protocol: TCP
+          env:
+            - name: OLLAMA_HOST
+              value: "0.0.0.0:11434"
+            - name: OLLAMA_KEEP_ALIVE
+              value: "24h"        # Keep model loaded — builds can fail anytime
+            - name: OLLAMA_NUM_PARALLEL
+              value: "2"          # Allow 2 concurrent RCA requests
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: "all"
+          volumeMounts:
+            - name: ollama-data
+              mountPath: /root/.ollama
+          resources:
+            requests:
+              cpu: "2"
+              memory: "8Gi"
+              nvidia.com/gpu: "1"
+            limits:
+              cpu: "8"
+              memory: "32Gi"
+              nvidia.com/gpu: "1"
+          readinessProbe:
+            httpGet:
+              path: /api/tags
+              port: 11434
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /api/tags
+              port: 11434
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: ollama-data
+          persistentVolumeClaim:
+            claimName: ollama-model-storage
+      # Schedule on GPU nodes — change accelerator label to match your hardware:
+      # nvidia-tesla-t4 | nvidia-tesla-l4 | nvidia-tesla-a100
+      nodeSelector:
+        cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule

@@ -1,0 +1,25 @@
+##[group]Run mvn verify -B -Pslow-integration-tests
+2025-06-01T08:00:00.000Z [INFO] Scanning for projects...
+2025-06-01T08:00:01.000Z [INFO] Building fabric2-integration-tests 3.2.1-SNAPSHOT
+##[endgroup]
+
+##[group]Integration tests
+2025-06-01T08:00:05.000Z [INFO] --- maven-failsafe-plugin:3.1.2:integration-test (default) @ fabric2-integration-tests ---
+2025-06-01T08:00:05.500Z [INFO] Running com.fabric2.it.DatabaseMigrationIT
+2025-06-01T08:02:10.000Z [INFO] Running com.fabric2.it.EndToEndOrderFlowIT
+2025-06-01T08:05:30.000Z [INFO] Running com.fabric2.it.PaymentGatewayIT
+2025-06-01T08:09:45.000Z [INFO] Running com.fabric2.it.LegacySystemSyncIT
+2025-06-01T08:19:00.000Z [INFO] Running com.fabric2.it.ReportGenerationIT
+2025-06-01T08:19:10.000Z [INFO] Connecting to reporting database...
+2025-06-01T08:22:00.000Z [INFO] Still waiting for reporting DB connection (120s elapsed)...
+2025-06-01T08:24:30.000Z [INFO] Still waiting for reporting DB connection (270s elapsed)...
+##[endgroup]
+
+##[group]Timeout
+2025-06-01T08:30:00.000Z The job running on runner Hosted Agent has exceeded the maximum execution time of 30 minutes.
+2025-06-01T08:30:00.100Z Canceling the current step...
+2025-06-01T08:30:01.000Z [INFO] Tests run: 72, Failures: 0, Errors: 1, Skipped: 0
+2025-06-01T08:30:01.100Z [ERROR] An Errors occurred running integration tests
+2025-06-01T08:30:01.200Z ##[error]The operation was canceled.
+2025-06-01T08:30:01.300Z ##[error]Process completed with exit code 1.
+##[endgroup]

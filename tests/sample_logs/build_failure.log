@@ -1,0 +1,40 @@
+##[group]Run mvn clean verify -B
+2025-06-01T10:00:01.123Z [INFO] Scanning for projects...
+2025-06-01T10:00:01.456Z [INFO] ------------------------------------------------------------------------
+2025-06-01T10:00:01.789Z [INFO] Building fabric2-core-service 2.14.0-SNAPSHOT
+2025-06-01T10:00:01.890Z [INFO] ------------------------------------------------------------------------
+##[endgroup]
+
+##[group]Run tests
+2025-06-01T10:05:12.123Z [INFO] --- maven-surefire-plugin:3.1.2:test (default-test) @ fabric2-core-service ---
+2025-06-01T10:05:12.456Z [INFO] Running com.fabric2.auth.AuthTokenServiceTest
+2025-06-01T10:05:14.789Z [ERROR] Tests run: 8, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 2.33 s <<< FAILURE! - in com.fabric2.auth.AuthTokenServiceTest
+2025-06-01T10:05:14.801Z [ERROR] com.fabric2.auth.AuthTokenServiceTest.testValidTokenGeneration  Time elapsed: 0.891 s  <<< FAILURE!
+2025-06-01T10:05:14.812Z java.lang.AssertionError: expected:<200> but was:<500>
+2025-06-01T10:05:14.813Z     at org.junit.Assert.fail(Assert.java:89)
+2025-06-01T10:05:14.814Z     at org.junit.Assert.failNotEquals(Assert.java:835)
+2025-06-01T10:05:14.815Z     at org.junit.Assert.assertEquals(Assert.java:647)
+2025-06-01T10:05:14.816Z     at com.fabric2.auth.AuthTokenServiceTest.testValidTokenGeneration(AuthTokenServiceTest.java:67)
+2025-06-01T10:05:14.820Z [ERROR] com.fabric2.auth.AuthTokenServiceTest.testTokenRefresh  Time elapsed: 0.312 s  <<< FAILURE!
+2025-06-01T10:05:14.821Z java.lang.AssertionError: Token refresh should return new expiry but returned null
+2025-06-01T10:05:14.822Z     at org.junit.Assert.fail(Assert.java:89)
+2025-06-01T10:05:14.823Z     at com.fabric2.auth.AuthTokenServiceTest.testTokenRefresh(AuthTokenServiceTest.java:104)
+2025-06-01T10:05:15.100Z [INFO] Running com.fabric2.payment.PaymentProcessorTest
+2025-06-01T10:06:10.450Z [INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 55.35 s
+##[endgroup]
+
+##[group]Build summary
+2025-06-01T10:06:11.100Z [INFO] ------------------------------------------------------------------------
+2025-06-01T10:06:11.101Z [INFO] BUILD FAILURE
+2025-06-01T10:06:11.102Z [INFO] ------------------------------------------------------------------------
+2025-06-01T10:06:11.103Z [INFO] Total time:  6:10 min
+2025-06-01T10:06:11.104Z [INFO] Finished at: 2025-06-01T10:06:11+00:00
+2025-06-01T10:06:11.200Z [INFO] ------------------------------------------------------------------------
+2025-06-01T10:06:11.201Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.1.2:test (default-test) on project fabric2-core-service: There are test failures.
+2025-06-01T10:06:11.202Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+2025-06-01T10:06:11.203Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+2025-06-01T10:06:11.204Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+2025-06-01T10:06:11.205Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+##[endgroup]
+
+##[error]Process completed with exit code 1.
