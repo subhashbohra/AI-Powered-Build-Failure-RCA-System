@@ -63,30 +63,30 @@ the workflow env block. See application-test.yml line 42.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│                        GitHub Enterprise (Fabric2)                            │
-│                                                                               │
-│  release_build.yml  ──┐                 .github/workflows/rca_trigger.yml   │
-│  snapshot_build.yml ──┴─ on failure ──► workflow_run trigger                │
-│                                          │  runs-on: [self-hosted, linux, gdc]│
-│  Pull Request ◄── RCA comment ──────────┘                                   │
+│                        GitHub Enterprise (Fabric2)                           │
+│                                                                              │
+│  release_build.yml  ──┐                 .github/workflows/rca_trigger.yml    │
+│  snapshot_build.yml ──┴─ on failure ──► workflow_run trigger                 │
+│                                          │ runs-on: [self-hosted, linux, gdc]│
+│  Pull Request ◄── RCA comment ──────────┘                                    │
 └──────────────────────────────────────────────────────────────────────────────┘
                                     │ dispatches to
                                     ▼
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │              Self-Hosted Runner  (GDC/GKE Network)                           │
-│                                                                               │
-│  src/log_parser.py   src/ollama_client.py   src/rca_prompt.py               │
-│  src/output_formatter.py   ←──  scripts/run_rca.py  (orchestrator)         │
+│                                                                              │
+│  src/log_parser.py   src/ollama_client.py   src/rca_prompt.py                │
+│  src/output_formatter.py   ←──  scripts/run_rca.py  (orchestrator)           │
 └───────────────────────────────────────┬──────────────────────────────────────┘
                                         │ HTTP :11434
                                         ▼
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│        GDC / GKE Cluster — Namespace: ollama-rca  (Air-Gapped)              │
-│                                                                               │
-│  Service: ClusterIP :11434  ──►  Pod: ollama/ollama:latest                  │
-│                                       Model: gemma3:27b-it-qat (~16 GB)     │
-│                                       GPU:   NVIDIA T4 / L4 (24 GB VRAM)   │
-│                                       PVC:   50 Gi model storage            │
+│        GDC / GKE Cluster — Namespace: ollama-rca  (Air-Gapped)               │
+│                                                                              │
+│  Service: ClusterIP :11434  ──►  Pod: ollama/ollama:latest                   │
+│                                       Model: gemma3:27b-it-qat (~16 GB)      │
+│                                       GPU:   NVIDIA T4 / L4 (24 GB VRAM)     │
+│                                       PVC:   50 Gi model storage             │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
